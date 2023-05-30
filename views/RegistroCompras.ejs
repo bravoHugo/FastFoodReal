@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bootstrap demo</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
+      crossorigin="anonymous"
+    />
+    <script src="https://kit.fontawesome.com/b1d1afb1da.js" crossorigin="anonymous"></script>
+
+  </head>
+  <body>
+    <main>
+        <nav class="navbar bg-light" aria-label="Light offcanvas navbar">
+            <div class="container-fluid">
+              <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasNavbarLight"
+                aria-controls="offcanvasNavbarLight"
+              >
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <a class="navbar-brand" href="#">AdminPanel Kentakitos</a>
+    
+              <div
+                class="offcanvas offcanvas-start"
+                tabindex="-1"
+                id="offcanvasNavbarLight"
+                aria-labelledby="offcanvasNavbarLightLabel"
+              >
+                <div class="offcanvas-header">
+                  <h5 class="offcanvas-title" id="offcanvasNavbarLightLabel">
+                    Kentakitos
+                  </h5>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="offcanvas"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="offcanvas-body">
+                  <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                    <li class="nav-item dropdown">
+                      <a
+                        class="nav-link dropdown-toggle"
+                        href="#"
+                        role="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                      >
+                        USUARIOS
+                      </a>
+                      <ul class="dropdown-menu">
+                        <li>
+                          <a class="dropdown-item" href="/user/admin/register">Registrar Usuarios</a>
+                        </li>
+                        <li>
+                          <a class="dropdown-item" href="/user/admin/permission">Asignar Permisos</a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                      <a
+                        class="nav-link dropdown-toggle"
+                        href="#"
+                        role="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                      >
+                        PRODUCTOS
+                      </a>
+                      <ul class="dropdown-menu">
+                        <li>
+                          <a class="dropdown-item" href="/productos">Registrar Productos</a>
+                        </li>
+                        <li>
+                          <a class="dropdown-item" href="/categorias">Registrar Categorias</a>
+                        </li>
+                        <li>
+                          <a class="dropdown-item" href="/proveedores"
+                            >Registrar Proveedores</a
+                          >
+                        </li>
+                        <li>
+                          <a class="dropdown-item" href="/marcas"
+                            >Registrar Marcas</a
+                          >
+                        </li>
+                      </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                      <a
+                        class="nav-link dropdown-toggle"
+                        href="#"
+                        role="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                      >
+                        COMPRAS
+                      </a>
+                      <ul class="dropdown-menu">
+                        <li>
+                          <a class="dropdown-item" href="/compras"> Registar Compras</a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a
+                          class="nav-link dropdown-toggle"
+                          href="#"
+                          role="button"
+                          data-bs-toggle="dropdown"
+                          aria-expanded="false"
+                        >
+                          VENTAS
+                        </a>
+                        <ul class="dropdown-menu">
+                          <li>
+                            <a class="dropdown-item" href="/menues"> Registar Menu</a>
+                          </li>
+                        </ul>
+                      </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </nav>
+      <!-- aqui empieza el contenido -->
+      <div class="container">
+        <div class="bg-light p-2">
+          <div class="col-sm-8 py-5 mx-auto">
+            <h1 class="display-5 fw-normal text-center">Registrar Compras</h1>
+            <hr />
+            <div class="text-center" id="mensajeRucNoEncontrado"></div>
+            <form id="agregarCompra" action="/compras"  method="post">
+              <div class="container">
+                <div class="row">
+                  <div class="col-6">
+                    <div class="input-group mb-3">
+                      <span class="input-group-text">Proveedor</span>
+                      <select class="form-select" aria-label="Default select example" id="proveedor" required name="proveedor">
+                        
+                                 
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="input-group mb-3">
+                      <span class="input-group-text">Representante</span>
+                      <input type="text" class="form-control" name="representante" id="representante" required readonly />
+                    </div>
+                  </div>
+                  <div class="col-5">
+                    <div class="input-group mb-3">
+                      <span class="input-group-text">Celular</span>
+                      <input type="number" class="form-control" name="numcelular" id="numcelular" required readonly/>
+                    </div>
+                  </div>
+                  
+                  <div class="col-7">
+                    <div class="input-group mb-3">
+                      <span class="input-group-text">Dirección</span>
+                      <input type="text" class="form-control" name="direccion" id="direccion" required readonly />
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="col-4">
+                    <div class="input-group mb-3">
+                      <span class="input-group-text">Fecha Compra</span>
+                      <input type="text" class="form-control" name="fecha-actual" id="fecha-actual" required readonly>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="input-group mb-3">
+                      <span class="input-group-text">Productos</span>
+                      <select class="form-select" aria-label="Default select example" id="productos"  required name="productos">    
+                      </select>
+                    </div>
+                  </div>
+                <hr>
+                <input type="text" class="form-control"  hidden name="nombre" id="nombre" required readonly/>
+                <input type="number" class="form-control"  hidden name="id" id="id" required readonly/>
+                  <div class="col-8">
+                    <div class="input-group mb-3">
+                      <span class="input-group-text">Descripcion</span>
+                      <input type="text" class="form-control" name="desc" id="desc"  readonly/>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="input-group mb-3">
+                      <span class="input-group-text">Categoria</span>
+                      <input type="text" class="form-control" name="categoria" id="categoria"  readonly/>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="input-group mb-3">
+                      <span class="input-group-text">Marca</span>
+                      <input type="text" class="form-control" name="marca" id="marca"  readonly/>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="input-group mb-3">
+                      <span class="input-group-text">Unidad</span>
+                      <input type="text" class="form-control" name="unidad" id="unidad"  readonly/>
+                    </div>
+                  </div>
+                  <div class="col-3">
+                    <div class="input-group mb-3">
+                      <span class="input-group-text">Cantidad</span>
+                      <input type="number" class="form-control" name="cantidad" id="cantidad"  readonly />
+                    </div>
+                  </div>
+                  <div class="col-3">
+                    <div class="input-group mb-3">
+                      <span class="input-group-text">Costo</span>
+                      <input type="number" class="form-control" name="costo" id="costo"  readonly />
+                    </div>
+                  </div>
+                  <div class="col-3">
+                    <div class="input-group mb-3">
+                      <span class="input-group-text">Total</span>
+                      <input type="number" class="form-control" name="total" id="total"  readonly/>
+                    </div>
+                  </div>
+                  <div class="col-3">
+                    <button id="btnConfirmar" type="button"   class="btn btn-primary">CONFIRMAR</button>
+                </div>
+                  <hr>
+                  <h6>Productos Seleccionados</h6>
+                <div class="col-12">
+                <table class="table caption-top table-light table-striped" id="mitabla">
+                 <thead class="table-dark">
+                <tr>
+                <th>Producto</th>
+                <th>Descripcion</th>
+                <th>Cantidad</th>
+                <th>Costo</th>
+                <th>Total</th>
+        <!-- Agrega más columnas si es necesario -->
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+            </div>
+            <div class="col-4">
+                <div class="input-group mb-3">
+                  <span class="input-group-text">Total de la Compra</span>
+                  <input type="number" class="form-control" name="totalcompra" id="totalcompra" required readonly/>
+                </div>
+              </div>
+              <button id="btnEnviar" type="submit"  class="btn btn-primary">GUARDAR COMPRA</button>
+            </div>   
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>      
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>    
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+      crossorigin="anonymous"
+    >
+  </script>
+<script>
+    // Obtener la fecha actual
+    var fechaActual = new Date();
+    
+    // Obtener los componentes de la fecha
+    var dia = fechaActual.getDate();
+    var mes = fechaActual.getMonth() + 1; // Los meses son indexados desde 0, así que sumamos 1
+    var anio = fechaActual.getFullYear();
+    
+    // Formatear la fecha en el formato deseado
+    var fechaFormateada = dia + '/' + mes + '/' + anio;
+    
+    // Actualizar el contenido del elemento HTML
+    document.getElementById('fecha-actual').value = fechaFormateada;
+  </script>
+<script>
+
+</script>
+<script>
+async function obtenerProveedor() {
+const response =await axios.get(`/compras4prove`)
+let comprasOptions = '<option selected>Seleccione el proveedor</option>'
+const compras = response.data
+console.log(compras)
+compras.forEach(element => {
+    comprasOptions +=`<option value="${element.codproveedor}">${element.nomcompania}</option>`
+});
+const selectItem = document.getElementById("proveedor");
+const representanteField = document.getElementById("representante");
+const numCelularField = document.getElementById("numcelular")
+const direccionField  = document.getElementById("direccion")
+selectItem.innerHTML=comprasOptions
+selectItem.onchange = function() {
+    const selectedValue = selectItem.value;
+    console.log('Valor seleccionado:', selectedValue);
+    compras.forEach(element => {
+    if (element.codproveedor==selectedValue) {
+        representanteField.value=`${element.representante}`;
+        numCelularField.value=`${element.telefono}`
+        direccionField.value= `${element.direccion}`
+        
+    }
+});
+    // Llama a una función o realiza otras acciones aquí
+  };
+}
+obtenerProveedor()
+</script>
+
+<!-- /funcion para obtener los productos -->
+<script>
+    async function obtenerProductos() {
+    const response =await axios.get(`/compras4products`)
+    let productosOptions = '<option selected>Seleccione el producto</option>'
+    const productos = response.data
+    console.log(productos)
+    productos.forEach(element => {
+        productosOptions +=`<option value="${element.idproducto}">${element.nombre}</option>`
+    });
+    const selectItem = document.getElementById("productos")
+    const id = document.getElementById("id");
+    const nombreproducto = document.getElementById("nombre")
+    const Descripcion = document.getElementById("desc");
+    const Categoria = document.getElementById("categoria")
+    const Marca  = document.getElementById("marca")
+    const Unidad  = document.getElementById("unidad")
+    const cantidad = document.getElementById("cantidad");
+    const costo = document.getElementById("costo");
+    const btnConfirmar = document.getElementById("btnConfirmar")
+    const btnGuardar = document.getElementById("btnEnviar")
+    
+    selectItem.innerHTML=productosOptions
+    selectItem.onchange = function() {
+        const selectedValue = selectItem.value;
+        console.log('Valor seleccionado:', selectedValue);
+        productos.forEach(element => {
+        if (element.idproducto==selectedValue) {
+            id.value=`${element.idproducto}`;
+            nombreproducto.value=`${element.nombre}`;
+            Descripcion.value=`${element.descripcion}`
+            Categoria.value= `${element.Categoria}`
+            Marca.value= `${element.Marcas}`
+            Unidad.value =`${element.Unidad}`
+        }
+        cantidad.removeAttribute('readonly');
+    costo.removeAttribute('readonly');
+    btnConfirmar.disabled = false
+    btnGuardar.disabled = false
+
+    });
+        // Llama a una función o realiza otras acciones aquí
+      };
+     
+    }
+    obtenerProductos()
+</script>
+<script>
+    async function Calculos() {
+    const cantidad = document.getElementById("cantidad");
+    const costo = document.getElementById("costo");
+    const total = document.getElementById("total");
+
+    cantidad.oninput = function() {
+      let cantidadValue = parseFloat(cantidad.value);
+      let costoValue = parseFloat(costo.value);
+      if (!isNaN(cantidadValue) && !isNaN(costoValue)) {
+      const resultado = cantidadValue * costoValue;
+      total.value = isNaN(resultado) ? '' : resultado;
+    } else {
+      total.value = '';
+    }    
+    };
+    costo.oninput = function() {
+      let cantidadValue = parseFloat(cantidad.value);
+      let costoValue = parseFloat(costo.value);
+      if (!isNaN(cantidadValue) && !isNaN(costoValue)) {
+      const resultado = cantidadValue * costoValue;
+      total.value = isNaN(resultado) ? '' : resultado;
+    } else {
+      total.value = '';
+    }    
+    };
+  }
+
+  Calculos();
+</script>
+<script>
+    window.productosSeleccionados = [];
+    let totalCompra = 0;
+    document.getElementById('btnConfirmar').addEventListener('click', agregarProducto);
+     function agregarProducto() {
+        const id = document.getElementById("id").value;
+        const nombre = document.getElementById("nombre").value;
+        const descripcion = document.getElementById("desc").value;
+        const cantidad = document.getElementById("cantidad").value;
+        const costo = document.getElementById("costo").value;
+        const total = document.getElementById("total").value;
+
+        const producto = {
+        id: id,
+        nombre,
+        descripcion: descripcion,
+        cantidad: cantidad,
+        costo: costo,
+        total: total
+        };
+
+        productosSeleccionados.push(producto);
+        
+        document.getElementById("id").value = "";
+        document.getElementById("desc").value = "";
+        document.getElementById("cantidad").value = "";
+        document.getElementById("costo").value = "";
+        document.getElementById("total").value = "";
+        document.getElementById("marca").value = "";
+        document.getElementById("unidad").value = "";
+        document.getElementById("nombre").value = "";
+        mostrarProductosSeleccionados();
+
+        function mostrarProductosSeleccionados() {
+  const tabla = document.getElementById("mitabla");
+  const tbody = tabla.querySelector("tbody");
+
+  // Vaciar el contenido de la tabla
+  tbody.innerHTML = "";
+  totalCompra = 0;
+
+
+  // Recorrer el array de productos seleccionados y agregar filas a la tabla
+  productosSeleccionados.forEach(producto => {
+    const fila = document.createElement("tr");
+    fila.innerHTML = `
+      <td>${producto.nombre}</td>
+      <td>${producto.descripcion}</td>
+      <td>${producto.cantidad}</td>
+      <td>${producto.costo}</td>
+      <td>${producto.total}</td>
+    `;
+    //sum all products.total
+    let aux = parseFloat(`${producto.total}`)
+        totalCompra += aux;
+    tbody.appendChild(fila);
+    });
+}
+   const totaldetodalacompra =document.getElementById("totalcompra")
+   totaldetodalacompra.value = parseFloat(totalCompra)
+    }
+</script>
+<script>
+    document.getElementById('btnEnviar').addEventListener('click', guardarCompra);
+    async function guardarCompra(){
+        document.getElementById('agregarCompra').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const fechacompra = document.getElementById("fecha-actual")
+            const totalcompra = document.getElementById("totalcompra")
+            const estadocompra = '1'
+            const codproveedor = document.getElementById("proveedor")
+            console.log(fechacompra.value)
+            console.log(totalcompra.value)
+            console.log(estadocompra)
+            console.log(codproveedor.options[codproveedor.selectedIndex].value);
+            let idInserdado;
+
+
+            const formData = new FormData();
+            formData.append('fecha-actual', fechacompra.value);
+            formData.append('totalcompra', totalcompra.value); 
+            formData.append('estado',estadocompra) 
+            formData.append('proveedor', codproveedor.options[codproveedor.selectedIndex].value);
+            try {
+                const  response = await axios.post(`/compras`,formData)
+                const insertedRow  = response.data[0]
+                idInserdado = insertedRow.idcompra
+                console.log(idInserdado)
+            } catch (error) {
+                console.error(error)
+            }
+            
+            try {
+        for (const element of productosSeleccionados) {
+        const formData1 = new FormData();
+        formData1.append('idcompra', idInserdado);
+        let idproducto = element.id
+        let cantidad = element.cantidad
+        let costo = element.costo
+        let total = element.total
+        formData1.append('idproducto', idproducto); 
+        formData1.append('cantidad', cantidad); 
+        formData1.append('precio', costo);
+        formData1.append('total', total);
+        
+        const response = await axios.post(`/detallecompras`, formData1);
+        const insertedRow = response.data[0];
+        console.log(insertedRow);
+        Swal.fire('Registrado!', '', 'success');
+        setTimeout(function () {
+            location.reload();
+        }, 1000);
+    }
+} catch (error) {
+    console.error(error);
+}
+
+            
+        })
+    }
+</script>
+</body>
+</html>

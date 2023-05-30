@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fast Food</title>
+    <link rel="stylesheet" href="/assets/Style/style1.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="overlay"></div>
+    <form action="index.html" method="post" class="box">
+      <div class="header">
+        <h4>Actualizar Información</h4>
+      </div>
+      <div class="login-area">
+        <input
+          type="email"
+          class="email"
+          placeholder="Correo"
+          id="correo"
+          name="correo"
+          value="<%= correo %>"
+          readonly
+        />
+        <input
+          type="name"
+          class="name"
+          placeholder="Nombres"
+          d="nombres"
+          name="nombres"
+          value="<%= usuario.nombres %>"
+          required
+        />
+        <input
+          type="text"
+          class="lasname"
+          placeholder="Apallidos"
+          id="apellidos"
+          name="apellidos"
+          value="<%= usuario.apellidos %>"
+          required
+        />
+        <input
+            type="tel"
+            class="number"
+            id="dni"
+            name="dni"
+            placeholder="Numero de DNI"
+            value="<%= usuario.dni %>"
+            required
+          />
+        <input
+          type="tel"
+          class="number"
+          placeholder="Numero de celular"
+          id="celular"
+          name="celular"
+          value="<%= usuario.celular %>"
+          required
+        />
+        <input
+          id="direccion"
+          name="direccion"
+          required
+          class="address"
+          placeholder="Dirección"
+          value="<%= usuario.direccion %>"
+        ></input>
+        <input type="submit" value="ACTUALIZAR" class="submit" />
+        <button class="submit1" onclick="window.location.href = '/user/index';"> Volver</button>
+      </div>
+    </form>
+    <% if (typeof errors != 'undefined') { %>
+    <script>
+      var errorMessage = "<ul>";
+      <% errors.forEach(error => { %>
+        errorMessage += "<li><%= error.message %></li>";
+      <% }) %>
+      errorMessage += "</ul>";
+      alert(errorMessage);
+    </script>
+    <% } %>
+  </body>
+</html>

@@ -1,0 +1,239 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&family=Poppins:wght@300;400&display=swap');
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+}
+
+h1{
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+
+.mesas {
+  position: absolute;
+  transform: translate(0, -50%);  
+  padding: 20px 60px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.label {
+  position: absolute;
+  top: 2rem;
+  right: 4rem;
+  transform: translate(0, -50%);  
+  padding: 10px 30px;
+  background-color: #f77925;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+table {
+  margin-bottom:2rem; /* Ajusta el valor según el espacio deseado */
+  float: right;
+  clear: both;
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #ccc;
+}
+
+th {
+  background-color: #f2f2f2;
+  text-align: left;
+  padding: 8px;
+  width: 5%;
+  border: 1px solid #ccc;
+}
+
+td {
+  padding: 8px;
+  width: 6%;
+  border: 1px solid #ccc;
+}
+
+.table-disponibles{
+  position: absolute;
+  top: 20%;
+  left: 30%;
+  width: 50%;
+  height: 35rem;
+  background-color:cornsilk;
+  border-width: 2px; /* Ancho del borde */
+  border-style: solid; /* Estilo del borde */
+  border-color: rgb(158, 108, 108);}
+
+.mesa1{
+  position: absolute;
+  top: 20%;
+  left: 10%;
+}
+
+.mesa2{
+  position: absolute;
+  top: 20%;
+  left: 40%;
+}
+
+.mesa3{
+  position: absolute;
+  top: 20%;
+  left: 70%;
+}
+
+.mesa4{
+  position: absolute;
+  top: 50%;
+  left: 10%;
+}
+
+.mesa5{
+  position: absolute;
+  top: 50%;
+  left: 40%;
+}
+.mesa6{
+  position: absolute;
+  top: 50%;
+  left: 70%;
+}
+
+.mesa7{
+  position: absolute;
+  top: 80%;
+  left: 10%;
+}
+.mesa8{
+  position: absolute;
+  top: 80%;
+  left: 40%;
+}
+.mesa9{
+  position: absolute;
+  top: 80%;
+  left: 70%;
+}
+
+.table-container {
+  width: 50%;
+  margin: 0 auto; /* centra el contenedor horizontalmente */
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+body{
+  font-family: 'Poppins', sans-serif;
+  background:#EAEBEF;
+}
+
+nav{
+  width: 300px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+}
+
+.nav__link{
+  color: #303440;
+  display: block;
+  padding: 15px 0;
+  text-decoration:none;
+}
+
+.nav__link--inside{
+  border-radius: 6px;
+  padding-left: 20px;
+  text-align: left;
+}
+
+.nav__link--inside:hover{
+  background: #F6F8FA;
+}
+
+.list{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 0 16px 16px 0;
+  background: #fff;
+}
+
+.list__item{
+  list-style: none;
+  width: 100%;
+  text-align: center;
+  overflow: hidden;
+}
+
+ .list__item--click{
+  cursor: pointer;
+ }
+
+.list__button{
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  width: 70%;
+  margin: 0 auto;
+}
+
+.list__arrow{
+  margin-left: auto;
+  transition: transform .3s;
+}
+
+.list__show{
+  width: 80%;
+  margin-left: auto;
+  border-left: 2px solid #303440;
+  list-style: none;
+  transition: height .4s;
+  height: 0;
+}
+
+.arrow .list__arrow{
+  transform: rotate(90deg);
+}
+
+input {
+  /* Estilos generales para todos los inputs */
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+input:focus {
+  /* Estilos cuando el input tiene el foco */
+  border-color: blue;
+  box-shadow: 0 0 5px blue;
+}
+input:disabled {
+  /* Estilos para inputs desactivados */
+  background-color: #f0f0f0;
+  color: #888;
+}
+#platos-container {
+  text-align: left; /* Alinear el contenido a la izquierda */
+}
+
+input:not([type="checkbox"]):not([type="text"]) {
+  width: 17.1rem;
+}
+
+.fila-roja {
+  background-color: rgb(61, 230, 70);
+}

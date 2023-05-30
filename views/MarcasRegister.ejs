@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bootstrap demo</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <main>
+      <nav class="navbar bg-light" aria-label="Light offcanvas navbar">
+        <div class="container-fluid">
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasNavbarLight"
+            aria-controls="offcanvasNavbarLight"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <a class="navbar-brand" href="#">AdminPanel Kentakitos</a>
+
+          <div
+            class="offcanvas offcanvas-start"
+            tabindex="-1"
+            id="offcanvasNavbarLight"
+            aria-labelledby="offcanvasNavbarLightLabel"
+          >
+            <div class="offcanvas-header">
+              <h5 class="offcanvas-title" id="offcanvasNavbarLightLabel">
+                Kentakitos
+              </h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="offcanvas"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="offcanvas-body">
+              <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                <li class="nav-item dropdown">
+                  <a
+                    class="nav-link dropdown-toggle"
+                    href="#"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    USUARIOS
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <a class="dropdown-item" href="/user/admin/register">Registrar Usuarios</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="/user/admin/permission">Asignar Permisos</a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="nav-item dropdown">
+                  <a
+                    class="nav-link dropdown-toggle"
+                    href="#"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    PRODUCTOS
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <a class="dropdown-item" href="/productos">Registrar Productos</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="/categorias">Registrar Categorias</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="/proveedores"
+                        >Registrar Proveedores</a
+                      >
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="/marcas"
+                        >Registrar Marcas</a
+                      >
+                    </li>
+                  </ul>
+                </li>
+                <li class="nav-item dropdown">
+                  <a
+                    class="nav-link dropdown-toggle"
+                    href="#"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    COMPRAS
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <a class="dropdown-item" href="/compras"> Registar Compras</a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a
+                      class="nav-link dropdown-toggle"
+                      href="#"
+                      role="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      VENTAS
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li>
+                        <a class="dropdown-item" href="/menues"> Registar Menu</a>
+                      </li>
+                    </ul>
+                  </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div class="container">
+        <div class="bg-light p-2">
+          <div class="col-sm-8 py-5 mx-auto">
+            <h1 class="display-5 fw-normal text-center">Registar Marcas</h1>
+            <form action="/marcas" method="post" class="p-3 mt-3">
+              <label for="nombre">Nombre de la marca : </label>
+              <input
+                required
+                class="mt-3"
+                type="text"
+                name="nombre"
+                id="nombre"
+              />
+              <button type="submit">Registrar</button>
+            </form>
+            <hr />
+            <div class="table_marcas mt-3">
+              <h2>MIS MARCAS</h2>
+              <div class="overflow-y-scroll" style="height: 300px">
+                <table class="table caption-top table-light table-striped">
+                  <div class="position-static">
+                    <thead class="table-dark">
+                      <tr>
+                        <th>ID</th>
+                        <th>MARCA</th>
+                        <th>ESTADO</th>
+                      </tr>
+                    </thead>
+                  </div>
+                  <tbody>
+                    <!-- //make a ejs for each -->
+                    <% marcas.forEach(function(elemento) { %>
+                    <tr>
+                      <td><%=elemento.codmarca%></td>
+                      <td><%=elemento.nombre%></td>
+                      <td><%=elemento.estado%></td>
+                    </tr>
+                    <% }); %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

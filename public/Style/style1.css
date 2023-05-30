@@ -1,0 +1,165 @@
+body {
+  padding: 0;
+  margin: 0;
+  background-image: url("../images/food.jpeg");
+  background-size: 800px 600px; /* establece el tamaño de la imagen en 800x600 píxeles */
+  background-size: 100% auto;
+  font-family: "Montserrat", sans-serif;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.box {
+  position: absolute;
+  width: 400px;
+  background-color: white;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 15px;
+  box-shadow: 0 10px 10px 10px rgb(0, 0, 0, 0.2);
+}
+
+.header {
+  background-image: url("../images/food.jpeg");
+  background-size: cover;
+  padding: 60px 10px;
+  color: rgb(255, 255, 255);
+  border-radius: 15px 15px 0 0;
+  text-align: left;
+}
+
+.header p {
+  font-size: x-small;
+}
+
+.login-area {
+  text-align: center;
+  padding: 20px 20px 25px 25px;
+}
+
+.email,
+.password {
+  width: 100%;
+  text-align: center;
+  padding: 13px 0;
+  border-radius: 20px;
+  outline: none;
+  border: none;
+  color: white;
+  background-color: rgba(252, 64, 64, 0.966);
+  margin-bottom: 15px;
+  transition: 5s;
+}
+
+.email::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.password,
+.passwordr {
+  width: 100%;
+  text-align: center;
+  padding: 13px 0;
+  border-radius: 20px;
+  outline: none;
+  border: none;
+  color: white;
+  background-color: rgba(252, 64, 64, 0.966);
+  margin-bottom: 15px;
+  transition: 5s;
+}
+
+.password::placeholder,
+.passwordr::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.name,
+.lasname,
+.number,
+.address {
+  width: 100%;
+  text-align: center;
+  padding: 13px 0;
+  border-radius: 20px;
+  outline: none;
+  border: none;
+  color: white;
+  background-color: rgba(252, 64, 64, 0.966);
+  margin-bottom: 15px;
+  transition: 5s;
+}
+
+.name::placeholder,
+.lasname::placeholder,
+.number::placeholder,
+.address::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.submit1 {
+  width: 100px;
+  padding: 5px 0;
+  background-color: rgba(53, 2, 2, 0.897);
+  border-radius: 20px;
+  font-weight: bold;
+  color: white;
+  outline: none;
+  border-style: none;
+  margin: 10px;
+  transition: 2s;
+  cursor: pointer;
+}
+
+.submit1:hover {
+  letter-spacing: 3px;
+}
+
+.submit1:hover {
+  background-color: #1f0344;
+}
+
+.submit1::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.submit {
+  width: 300px;
+  padding: 13px 0;
+  background-color: rgba(53, 2, 2, 0.897);
+  border-radius: 20px;
+  font-weight: bold;
+  color: white;
+  outline: none;
+  border-style: none;
+  margin: 10px;
+  transition: 2s;
+  cursor: pointer;
+}
+
+.submit:hover {
+  letter-spacing: 3px;
+}
+
+.submit:hover {
+  background-color: #1f0344;
+}
+
+.submit::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+a {
+  display: block;
+  font-size: x-small;
+  text-decoration: none;
+  color: rgb(70, 7, 153);
+  margin-top: 0px;
+}

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fast Food</title>
+    <link rel="stylesheet" href="/assets/Style/style1.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="overlay"></div>
+    <form action="/user/recuperar" method="post" class="box">
+      <div class="header">
+        <h4>Restablecer la contraseña</h4>
+        <p>
+          Introdusca su dirección de correo <br />electrónico registrado, para
+          recibir <br />el enlace de restablecimiento de <br />contraseña
+        </p>
+        
+      </div>
+      <div class="login-area">
+        <input
+          type="email"
+          id="correo"
+          name="correo"
+          class="email"
+          placeholder="CORREO"
+        />
+
+        <input type="submit" value="Enviar" class="submit" />
+
+        <% if (typeof errors != 'undefined') { %>
+        <script>
+          var errorMessage = "<ul>";
+          <% errors.forEach(error => { %>
+            errorMessage += "<li><%= error.message %></li>";
+          <% }) %>
+          errorMessage += "</ul>";
+          alert(errorMessage);
+        </script>
+        <% } %>
+        <a href="/user/login">Iniciar Sesion</a>
+      </div>
+    </form>
+  </body>
+</html>

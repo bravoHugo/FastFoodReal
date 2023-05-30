@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kentakitos Hamburguer</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+    />
+    <link rel="icon" type="image/png" href="/assets/images/My project-1.png">
+    <link rel="stylesheet" href="/assets/Style/main.css" />
+    <script type="text/javascript">
+      window.addEventListener("load", function() {
+        setTimeout(function() {
+          document.getElementById("ov-preloader").classList.add("fade-out");
+          document.getElementById("ov-preloader").style.pointerEvents = "none";
+        }, 500);
+      });
+    </script>
+  </head>
+  <body>
+    <div id="ov-preloader" class="ov-preloader" style="pointer-events: none;">
+      <div class="ov-icon"></div>
+    </div>
+      <div class="wrapper">
+        <header class="header-mobile">
+          <h1 class="logo">KENTAKITOS HAMBURGUER</h1>
+          <button class="open-menu" id="open-menu">
+            <i class="bi bi-list"></i>
+          </button>
+        </header>
+        <aside>
+          <button class="close-menu" id="close-menu">
+            <i class="bi bi-x"></i>
+          </button>
+          <header>
+            <div class="logo-container">
+              <h1>Kentakitos Hamburguer</h1>
+              <img
+                src="/assets/images/My project-1.png"
+                alt="Logo de Kentakitos Hamburguer"
+              />
+            </div>
+            <button id="botoninicio" class="btn-inicio" onclick="irASesion()">
+              <% if (usuarioEstaLogueado) { %><i class="bi bi-box-arrow-in-left"></i> Cerrar sesión <% } else { %>
+              <i class="bi bi-box-arrow-in-right"></i> Iniciar sesión <% } %>
+            </button>
+            <script>
+                const botonInicio = document.querySelector("#botoninicio");
+                botonInicio.addEventListener("click", irASesion);
+                function irASesion() {
+                if (<%= usuarioEstaLogueado %>) {
+                  window.location.href = "/user/logout";
+                  console.log("si entro a CERRAR SESION");
+                } else {
+                  window.location.href = "/user/login";
+                  console.log("si entro a irASesion");
+                }
+              }
+            </script>
+          </header>
+          <nav>
+            <ul class="menu">
+              <li>
+                <button id="todos" class="boton-menu boton-categoria active">
+                  <i class="bi bi-hand-index-thumb-fill"></i> Todos los productos
+                </button>
+              </li>
+              <li>
+                <button id="platillos" class="boton-menu boton-categoria">
+                  <i class="bi bi-hand-index-thumb"></i> Platillos
+                </button>
+              </li>
+              <li>
+                <button id="bebidas" class="boton-menu boton-categoria">
+                  <i class="bi bi-hand-index-thumb"></i> Bebidas
+                </button>
+              </li>
+              <li>
+                <button id="guarniciones" class="boton-menu boton-categoria">
+                  <i class="bi bi-hand-index-thumb"></i> Guarniciones
+                </button>
+              </li>
+              <li>
+                <a class="boton-menu boton-carrito" href="/user/carrito">
+                  <i class="bi bi-cart-fill"></i> Carrito
+                  <span id="numerito" class="numerito">0</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+          <footer>
+            <div class="contenedor">
+            <p class="texto-footer">© 2023 Kentakitos Hamburguer</p>
+            </div>
+          </footer>
+        </aside>
+        <main>
+          <% if (usuarioEstaLogueado) { %>
+            <button id="botonperfil" class="btninicio" onclick="irAPerfil()">
+              <i class="bi bi-person-circle"></i> Perfil
+            </button>
+            <script>
+              const botonPerfil = document.querySelector("#botonperfil");
+              botonPerfil.addEventListener("click", irAPerfil);
+              function irAPerfil() {
+                window.location.href = "/user/profile/<%= user %>";
+                console.log("si entro a ir a Perfil");
+              }
+            </script>
+          <% } %>
+          <h2 class="titulo-principal" id="titulo-principal">
+            Todos los productos
+          </h2>
+          <div id="contenedor-productos" class="contenedor-productos">
+            <!-- Esto se va a rellenar con JS -->
+          </div>
+        </main>
+      </div>
+      <script
+        type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/toastify-js"
+      ></script>
+      <script src="/assets/scripts/main.js"></script>
+      <script src="/assets/scripts/menu.js"></script>
+  </body>
+</html>

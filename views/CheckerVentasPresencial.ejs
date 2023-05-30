@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>  
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>  
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/assets/Style/desplegableStyle.css">
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>HOLA Cajero Mesas</h1>
+    <a href="/user/logout" class="label">Logout</a>
+    <nav class="nav nav-conteiner">
+      <ul class="list">
+        <li class="list__item">
+          <div class="list__button">
+            <img src="/assets/images/dashboard.svg" class="list__img">
+            <a href="/user/Checker" class="nav__link">Inicio</a>
+          </div>
+        </li>
+
+        <li class="list__item">
+          <div class="list__button">
+            <img src="/assets/images/stats.svg" class="list__img">
+            <a href="/user/CheckerVentasPresencial" class="nav__link">Mesas</a>
+          </div>
+        </li>
+
+        <li class="list__item list__item--click">
+          <div class="list__button list_button--click">
+            <img src="/assets/images/bell.svg" class="list__img">
+            <a href="#" class="nav__link">ventas</a>
+            <img src="/assets/images/arrow.svg" class="list__arrow">
+          </div>
+
+          <ul class="list__show">
+            <li class="list__inside">
+              <a href="/user/CheckerVentas" class="nav__link nav__link--inside"> Web</a>
+            </li>
+
+            <li class="list__inside">
+              <a href="/VentasLlevar" class="nav__link nav__link--inside"> Para llevar</a>
+            </li>
+
+            <li class="list__inside">
+              <a href="/checkermesas"  class="nav__link nav__link--inside"> Presencial</a>
+            </li>
+          </ul>
+        </li>
+        
+        <li class="list__item">
+          <div class="list__button">
+            <img src="/assets/images/message.svg" class="list__img">
+            <a href="/resumenVentas" class="nav__link">Resumen Ventas</a>
+          </div>
+        </li>
+      </ul>
+    </nav>
+    <div class="table-disponibles">
+      <section class="mesa1">
+        <button onclick="presiono1()" class="mesas" id="mesa_1" <% if (buttonestado1 === '1') { %>style="background-color: green;"<% } else { %>style="background-color: red;"<% } %>>Mesa 1
+        </button>
+      </section>
+      <section class="mesa2">
+        <button onclick="presiono2()" class="mesas" id="mesa_2" <% if (buttonestado2 === '3') { %>style="background-color: green;"<% } else { %>style="background-color: red;"<% } %>>Mesa 2
+        </button>
+      </section>
+      <section class="mesa3">
+        <button class="mesas" id="mesa_3" onclick="presiono3()" <% if (buttonestado3 === '5') { %>style="background-color: green;"<% } else { %>style="background-color: red;"<% } %>>
+          Mesa 3
+        </button>
+      </section>
+      <section class="mesa4">
+        <button class="mesas" id="mesa_4"  onclick="presiono4()" <% if (buttonestado4 === '7') { %>style="background-color: green;"<% } else { %>style="background-color: red;"<% } %>>
+          Mesa 4
+        </button>
+      </section>
+      <section class="mesa5">
+        <button class="mesas" id="mesa_5">
+          Mesa 5
+        </button>
+      </section>
+      <section class="mesa6">
+        <button class="mesas" id="mesa_6">
+          Mesa 6
+        </button>
+      </section>
+      <section class="mesa7">
+        <button class="mesas" id="mesa_7" >
+          Mesa 7
+        </button>
+      </section>
+      <section class="mesa8">
+        <button class="mesas" id="mesa_8" >
+          Mesa 8
+        </button>
+      </section>
+      <section class="mesa9">
+        <button class="mesas" id="mesa_9" >
+          Mesa 9
+        </button>
+      </section>
+    </div>
+    <script src="/assets/scripts/mesasCajero.js"></script>
+    <script src="/assets/scripts/desplegable.js"></script>
+  </body>
+</html>

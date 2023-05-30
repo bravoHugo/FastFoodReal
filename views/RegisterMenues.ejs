@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bootstrap demo</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
+      crossorigin="anonymous"
+    />
+    <script src="https://kit.fontawesome.com/b1d1afb1da.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
+  </head>
+  <body>
+    <main>
+      <nav class="navbar bg-light" aria-label="Light offcanvas navbar">
+        <div class="container-fluid">
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasNavbarLight"
+            aria-controls="offcanvasNavbarLight"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <a class="navbar-brand" href="#">AdminPanel Kentakitos</a>
+
+          <div
+            class="offcanvas offcanvas-start"
+            tabindex="-1"
+            id="offcanvasNavbarLight"
+            aria-labelledby="offcanvasNavbarLightLabel"
+          >
+            <div class="offcanvas-header">
+              <h5 class="offcanvas-title" id="offcanvasNavbarLightLabel">
+                Kentakitos
+              </h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="offcanvas"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="offcanvas-body">
+              <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                <li class="nav-item dropdown">
+                  <a
+                    class="nav-link dropdown-toggle"
+                    href="#"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    USUARIOS
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <a class="dropdown-item" href="/user/admin/register">Registrar Usuarios</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="/user/admin/permission">Asignar Permisos</a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="nav-item dropdown">
+                  <a
+                    class="nav-link dropdown-toggle"
+                    href="#"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    PRODUCTOS
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <a class="dropdown-item" href="/productos">Registrar Productos</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="/categorias">Registrar Categorias</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="/proveedores"
+                        >Registrar Proveedores</a
+                      >
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="/marcas"
+                        >Registrar Marcas</a
+                      >
+                    </li>
+                  </ul>
+                </li>
+                <li class="nav-item dropdown">
+                  <a
+                    class="nav-link dropdown-toggle"
+                    href="#"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    COMPRAS
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <a class="dropdown-item" href="/compras"> Registar Compras</a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a
+                      class="nav-link dropdown-toggle"
+                      href="#"
+                      role="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      VENTAS
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li>
+                        <a class="dropdown-item" href="/menues"> Registar Menu</a>
+                      </li>
+                    </ul>
+                  </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <!-- aqui empieza el contenido -->
+      <div class="container">
+        <div class="bg-light p-2">
+          <div class="col-sm-12 py-5">
+            <h1 class="display-5 fw-normal text-center">Menues</h1>
+            <hr />
+            <div class="container">
+                <span>Registar Menues</span>
+                <a onclick="agregar()" class="btn btn-outline-primary m-4"><i class="fa-solid fa-plus" style="color: #000000;"></i></a>
+            </div>
+            <div>
+                <table class="table caption-top table-light table-striped" id="mitabla">
+                  <div class="position-static">
+                    <thead class="table-dark">
+                      <tr>
+                        <th>Codproveedor</th>
+                        <th>Nombre</th>
+                        <th>Precio</th>
+                        <th>Stock</th>
+                        <th>Imagen</th>
+                        <th>Categoria</th>
+                        <th class="text-center">Opciones</th>
+                      </tr>
+                    </thead>
+                  </div>
+                  <tbody>
+                    <!-- //make a ejs for each -->
+                    <% datamenu.forEach(function(elemento) { %>
+                        <tr>
+                         <td><%=elemento.codplatillo%></td>
+                          <td><%=elemento.nombre%></td>
+                          <td><%=elemento.precio%></td>
+                          <td><%=elemento.stock%></td>
+                          <td><img src="assets/uploads/<%= elemento.img %>" alt="" width="50px"></td>
+                          <td><%=elemento.categoria%></td>
+                          <td>
+                            <% if (elemento.estado !== "2") { %>
+                            <div class="container d-flex gap-2 justify-content-center">
+                         <a onclick="editar(<%= elemento.codplatillo %>)" class="btn btn-outline-info">editar</a>
+                         <a onclick="eliminar(<%= elemento.codplatillo %>)" class="btn btn-outline-danger">borrar</a>
+                         <a onclick="publicar(<%= elemento.codplatillo %>)" class="btn btn-outline-danger">Publicar</a>
+                        </div>
+                        <% } else { %>
+                          <div class="container d-flex gap-2 justify-content-center">
+                            <a onclick="editar(<%= elemento.codplatillo %>)" class="btn btn-outline-info">editar</a>
+                            <a onclick="eliminar(<%= elemento.codplatillo %>)" class="btn btn-outline-danger">borrar</a>
+                            <a onclick="unpublish(<%= elemento.codplatillo %>)" class="btn btn-outline-danger">Dejar de Publicar</a>
+                           </div>
+                          <% } %>
+                        </td>
+                       
+                        </tr>
+                        <% }); %>
+                  
+                  </tbody>
+                </table>
+              </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>    
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+      crossorigin="anonymous"
+    >
+  </script>
+  <!-- SCRIPT PARA AGREGAR MENUES -->
+  <script>
+    async function agregar() {
+        Swal.fire({
+      title: 'Agregar Menu',
+         showCancelButton: false, // Ocultar el botón de cancelar de SweetAlert
+        showConfirmButton: false ,// Ocultar el botón de confirmar de SweetAlert
+      html: `
+      <form id="agregarMenu" method="post" action="/menues enctype="multipart/form-data">
+  <div class="form-group">
+    <label for="nombre">Nombre del Platillo</label>
+    <input type="text" class="form-control" id="nombre" name="nombre" required>
+  </div>
+  <div class="form-group">
+    <label for="precio">Precio</label>
+    <input type="number" class="form-control" id="precio" name="precio"  required>
+  </div>
+  <div class="form-group">
+    <label for="stock">Stock del Plato</label>
+    <input type="number" class="form-control" id="stock" name="stock" required>
+  </div>
+
+  <label for="categoria">Categoria</label>
+  <select class="form-select" aria-label="Default select example" id="categoria" name="categoria">
+    <option value="Platillos">Platillos</option>
+    <option value="Bebidas">Bebidas</option>
+    <option value="Guarniciones">Guarniciones</option>
+  </select>
+
+  <div class="input-group mb-3 mt-3">
+  <small class="pb-3" styly="font-size: 8px;">Recuerda que solo se aceptan imagenes de tipo <strong>jpg,png,jpeg</strong>.</small>
+  <label class="input-group-text" for="image">Imagen del Menu</label>
+  <input type="file" class="form-control" id="image" name="image" required>
+</div>
+
+<br/>
+<button type="submit" class="submit" style="background-color: #4CAF50; border: none; color: white; padding: 10px 24px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; border-radius: 5px; cursor: pointer;" id="registrarBoton">Registrar</button>
+<a href="#" class="cancel" style="background-color: #d33; border: none; color: white; padding: 10px 24px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; border-radius: 5px; cursor: pointer; margin-left: 10px;" id="cancelarBoton">Cancelar</a>
+
+  </form>`,
+      });
+      document.getElementById('agregarMenu').addEventListener('submit', async (event) => {
+    event.preventDefault(); // Evitar que el formulario se envíe de inmediato
+       const formData = new FormData(event.target);
+    try {
+        // Enviar el     formulario manualmente
+        const response = await axios.post('/menues',formData);
+        console.log(response)
+        Swal.fire('Registrado!', '', 'success');
+        setTimeout(function () {
+            location.reload();
+        }, 1000);
+    } catch (error) {
+        Swal.fire('Error', 'Ha ocurrido un error al enviar el formulario', 'error');
+    }
+});
+
+    document.getElementById('cancelarBoton').addEventListener('click', () => {
+        console.log('eres gei');
+        Swal.close();
+    });
+}   
+  </script>
+
+<script>
+  async function  editar(id) {
+      try {
+          response = await axios.get(`/menues/${id}`)
+          const datosmenu = response.data[0];
+          Swal.fire({
+    title: 'Editar Menu',
+       showCancelButton: false, // Ocultar el botón de cancelar de SweetAlert
+      showConfirmButton: false ,// Ocultar el botón de confirmar de SweetAlert
+    html: 
+    `<form id="agregarMenu" method="patch" action="/menues enctype="multipart/form-data">
+      <input type="number" class="form-control" hidden id="id" name="id" value="${datosmenu.codplatillo}" required>
+
+  <div class="form-group">
+    <label for="nombre">Nombre del Platillo</label>
+    <input type="text" class="form-control" id="nombre" name="nombre" value="${datosmenu.nombre}" required>
+  </div>
+  <div class="form-group">
+    <label for="precio">Precio</label>
+    <input type="number" class="form-control" id="precio" name="precio" value="${datosmenu.precio}" required>
+  </div>
+  <div class="form-group">
+    <label for="stock">Stock del Plato</label>
+    <input type="number" class="form-control" id="stock" name="stock" value="${datosmenu.stock}" required>
+  </div>
+
+  <label for="categoria">Categoria</label>
+<select class="form-select" aria-label="Default select example" id="categoria" name="categoria">
+  <option value="Platillos" ${datosmenu.categoria === "Platillos" ? "selected" : ""}>Platillos</option>
+  <option value="Bebidas" ${datosmenu.categoria === "Bebidas" ? "selected" : ""}>Bebidas</option>
+  <option value="Guarniciones" ${datosmenu.categoria === "Guarniciones" ? "selected" : ""}>Guarniciones</option>
+</select>
+
+
+  <div class="input-group mb-3 mt-3">
+    <small class="pb-3" styly="font-size: 8px;">Recuerda que solo se aceptan imagenes de tipo <strong>jpg,png,jpeg</strong>.</small>
+  <label class="input-group-text" for="image">Imagen del Menu</label>
+  <input type="file" class="form-control" id="image" name="image">
+</div>
+<br/>
+<button type="submit" class="submit" style="background-color: #4CAF50; border: none; color: white; padding: 10px 24px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; border-radius: 5px; cursor: pointer;" id="registrarBoton">Registrar</button>
+<a href="#" class="cancel" style="background-color: #d33; border: none; color: white; padding: 10px 24px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; border-radius: 5px; cursor: pointer; margin-left: 10px;" id="cancelarBoton">Cancelar</a>
+
+  </form>`,
+    });
+     // Agregar listener de evento para el botón "Registrar"
+     document.getElementById('agregarMenu').addEventListener('submit', async (event) => {
+  event.preventDefault(); // Evitar que el formulario se envíe de inmediato
+  const formData = new FormData(event.target);
+  try {
+      // Enviar el formulario manualmente
+      const response = await axios.patch('/menu',formData);
+      console.log(response)
+      Swal.fire('Modificado!', '', 'success');
+      setTimeout(function () {
+          location.reload();
+      }, 1000);
+  } catch (error) {
+      Swal.fire('Error', 'Ha ocurrido un error al enviar el formulario', 'error');
+  }
+});   
+    document.getElementById('cancelarBoton').addEventListener('click', () => {
+      console.log('eres gei')
+    Swal.close(); // Cerrar la ventana modal de SweetAlert
+  });  
+      } catch (error) {
+          console.log(error);
+       return res.status(500).json({
+      message: "Error al modificar el Menu",
+       error,
+  });
+      }
+     
+  }
+</script>
+<!-- ELIMINAR EL MENU -->
+<script>
+  function eliminar(id) {
+      Swal.fire({
+title: '¿Confirmar eliminar el registro?',
+icon : 'warning',
+showCancelButton: true,
+confirmButtonColor : "#3085d6",
+cancelButtonColor : "#d33",
+confirmButtonText: 'Confirmar',
+denyButtonText: `Cancelar`,
+}).then((result) => {
+/* Read more about isConfirmed, isDenied below */
+if (result.isConfirmed) {
+   Swal.fire('Eliminado!', '', 'success')
+  //wait 5 seg 
+  setTimeout(function(){ window.location = '/deletemenu/'+id }, 1000);
+} else if (result.isDenied) {
+  Swal.fire('Changes are not saved', '', 'info')
+}
+})
+  }
+</script>
+<!-- PUBLICAR EL MENU -->
+<script>
+  function publicar(id) {
+      Swal.fire({
+title: '¿Publicar el Menú?',
+icon : 'warning',
+showCancelButton: true,
+confirmButtonColor : "#3085d6",
+cancelButtonColor : "#d33",
+confirmButtonText: 'Confirmar',
+denyButtonText: `Cancelar`,
+}).then((result) => {
+/* Read more about isConfirmed, isDenied below */
+if (result.isConfirmed) {
+   Swal.fire('Publicado!', '', 'success')
+  //wait 5 seg 
+  setTimeout(function(){ window.location = '/publicarmenu/'+id }, 1000);
+} else if (result.isDenied) {
+  Swal.fire('Changes are not saved', '', 'info')
+}
+})
+  }
+</script>
+<!-- UNPUBLISH MENU -->
+<script>
+  function unpublish(id) {
+      Swal.fire({
+title: '¿Quitar Publicacíon del Menú?',
+icon : 'warning',
+showCancelButton: true,
+confirmButtonColor : "#3085d6",
+cancelButtonColor : "#d33",
+confirmButtonText: 'Confirmar',
+denyButtonText: `Cancelar`,
+}).then((result) => {
+/* Read more about isConfirmed, isDenied below */
+if (result.isConfirmed) {
+   Swal.fire('Se ha quitado la publicacion!', '', 'success')
+  //wait 5 seg 
+  setTimeout(function(){ window.location = '/quitarpublimenu/'+id }, 1000);
+} else if (result.isDenied) {
+  Swal.fire('Changes are not saved', '', 'info')
+}
+})
+  }
+</script>
+
+
+<!-- SCRIPT DE LA TABLA -->
+  <script>
+$(document).ready(function () {
+    $('#mitabla').DataTable();
+});
+  </script>
+  </body>
+</html>

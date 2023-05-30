@@ -1,0 +1,58 @@
+@font-face {
+  font-family: miFuente;
+  src: url(../tipografías/Montserrat-Medium.ttf);
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: miFuente;
+  src: url(../tipografías/Montserrat-SemiBold.ttf);
+  font-weight: 700;
+}
+
+body{
+  background-color: #f1b98f;
+}
+
+#cliente{
+  text-align: left;
+}
+
+form input, form textarea{
+  margin-bottom: 1em;
+  background-color:cornsilk;
+}
+
+img{
+  width: 5vw;
+}
+
+#nosotros{
+
+}
+
+.contenedor{
+  display: flex;
+}
+
+#cliente{
+  border-right: 1px solid black;
+}
+
+.box{
+  flex-basis: 50%;
+}
+
+.titulo-principal{
+  color: #2e1d1d;
+  font-family: sans-serif;
+}
+
+.cliente{
+  margin-left: 0;
+}
+
+svg{
+  width: 1em;
+  height: 1em;  
+}

@@ -1,0 +1,188 @@
+[
+  {
+    "id": "1",
+    "titulo": "Hamburguesa Clasica",
+    "imagen": "/assets/images/img/platillos/h_clasica.jpeg",
+    "categoria": {
+      "nombre": "Platillos",
+      "id": "platillos"
+    },
+    "precio": 10
+  },
+  {
+    "id": "2",
+    "titulo": "Hamburguesa Royal",
+    "imagen": "/assets/images/img/platillos/h_royal.jpg",
+    "categoria": {
+      "nombre": "Platillos",
+      "id": "platillos"
+    },
+    "precio": 15
+  },
+  {
+    "id": "3",
+    "titulo": "Hamburguesa Cecina",
+    "imagen": "/assets/images/img/platillos/h_cecina.jpg",
+    "categoria": {
+      "nombre": "Platillos",
+      "id": "platillos"
+    },
+    "precio": 20
+  },
+  {
+    "id": "4",
+    "titulo": "Hamburguesa ChoriQueso",
+    "imagen": "/assets/images/img/platillos/h_chorizoyqueso.jpg",
+    "categoria": {
+      "nombre": "Platillos",
+      "id": "platillos"
+    },
+    "precio": 20
+  },
+  {
+    "id": "5",
+    "titulo": "Broster Simple",
+    "imagen": "/assets/images/img/platillos/pollobroster.jpg",
+    "categoria": {
+      "nombre": "Platillos",
+      "id": "platillos"
+    },
+    "precio": 10
+  },
+  {
+    "id": "6",
+    "titulo": "Chaufa Simple",
+
+    "imagen": "/assets/images/img/platillos/arroz-chaufa.jpg",
+    "categoria": {
+      "nombre": "Platillos",
+      "id": "platillos"
+    },
+    "precio": 5
+  },
+  {
+    "id": "7",
+    "titulo": "Chaufa Simple",
+
+    "imagen": "/assets/images/img/platillos/arroz-chaufa.jpg",
+    "categoria": {
+      "nombre": "Platillos",
+      "id": "platillos"
+    },
+    "precio": 8
+  },
+  {
+    "id": "8",
+    "titulo": "Pollo broster y Chaufa",
+
+    "imagen": "/assets/images/img/platillos/chaufa.jpg",
+    "categoria": {
+      "nombre": "Platillos",
+      "id": "platillos"
+    },
+    "precio": 12
+  },
+  {
+    "id": "9",
+    "titulo": "Salchipapa",
+
+    "imagen": "/assets/images/img/platillos/salchipapa.jpg",
+    "categoria": {
+      "nombre": "Platillos",
+      "id": "platillos"
+    },
+    "precio": 6
+  },
+  {
+    "id": "10",
+    "titulo": "Salchipapa",
+
+    "imagen": "/assets/images/img/platillos/salchipapa.jpg",
+    "categoria": {
+      "nombre": "Platillos",
+      "id": "platillos"
+    },
+    "precio": 8
+  },
+  {
+    "id": "11",
+    "titulo": "Salchipapa",
+
+    "imagen": "/assets/images/img/platillos/salchipapa.jpg",
+    "categoria": {
+      "nombre": "Platillos",
+      "id": "platillos"
+    },
+    "precio": 10
+  },
+  {
+    "id": "12",
+    "titulo": "Cocona",
+    "imagen": "/assets/images/img/bebidas/r_cocona.jpg",
+    "categoria": {
+      "nombre": "Bebidas",
+      "id": "bebidas"
+    },
+    "precio": 2
+  },
+  {
+    "id": "13",
+    "titulo": "Maiz",
+    "imagen": "/assets/images/img/bebidas/r_maiz.jpg",
+    "categoria": {
+      "nombre": "Bebidas",
+      "id": "bebidas"
+    },
+    "precio": 2
+  },
+  {
+    "id": "14",
+    "titulo": "Maracuya",
+    "imagen": "/assets/images/img/bebidas/r_maracuya.png",
+    "categoria": {
+      "nombre": "Bebidas",
+      "id": "bebidas"
+    },
+    "precio": 2
+  },
+  {
+    "id": "15",
+    "titulo": "Gaseosa",
+    "imagen": "/assets/images/img/bebidas/gaseosa.png",
+    "categoria": {
+      "nombre": "Bebidas",
+      "id": "bebidas"
+    },
+    "precio": 3
+  },
+  {
+    "id": "16",
+    "titulo": "Chaufa",
+    "imagen": "/assets/images/img/guarniciones/g_chaufa.jpg",
+    "categoria": {
+      "nombre": "Guarniciones",
+      "id": "guarniciones"
+    },
+    "precio": 5
+  },
+  {
+    "id": "17",
+    "titulo": "Ensalada",
+    "imagen": "/assets/images/img/guarniciones/g_ensalada.jpg",
+    "categoria": {
+      "nombre": "Guarniciones",
+      "id": "guarniciones"
+    },
+    "precio": 5
+  },
+  {
+    "id": "18",
+    "titulo": "Papas",
+    "imagen": "/assets/images/img/guarniciones/g_papas.jpg",
+    "categoria": {
+      "nombre": "Guarniciones",
+      "id": "guarniciones"
+    },
+    "precio": 5
+  }
+]

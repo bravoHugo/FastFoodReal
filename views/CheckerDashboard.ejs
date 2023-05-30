@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>  
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js" integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/" crossorigin="anonymous"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/assets/Style/desplegableStyle.css">
+    <title>Document</title>
+  </head>
+  <body>
+    <nav class="nav nav-conteiner">
+      <ul class="list">
+        <li class="list__item">
+          <div class="list__button">
+            <img src="/assets/images/dashboard.svg" class="list__img">
+            <a href="/user/Checker" class="nav__link">Inicio</a>
+          </div>
+        </li>
+
+        <li class="list__item">
+          <div class="list__button">
+            <img src="/assets/images/stats.svg" class="list__img">
+            <a href="/user/CheckerVentasPresencial" class="nav__link">Mesas</a>
+          </div>
+        </li>
+
+        <li class="list__item list__item--click">
+          <div class="list__button list_button--click">
+            <img src="/assets/images/bell.svg" class="list__img">
+            <a href="#" class="nav__link">ventas</a>
+            <img src="/assets/images/arrow.svg" class="list__arrow">
+          </div>
+
+          <ul class="list__show">
+            <li class="list__inside">
+              <a href="/user/CheckerVentas" class="nav__link nav__link--inside"> Web</a>
+            </li>
+
+            <li class="list__inside">
+              <a href="/VentasLlevar" class="nav__link nav__link--inside"> Para llevar</a>
+            </li>
+
+            <li class="list__inside">
+              <a href="/checkermesas" class="nav__link nav__link--inside"> Presencial</a>
+            </li>
+          </ul>
+        </li>
+        
+        <li class="list__item">
+          <div class="list__button">
+            <img src="/assets/images/message.svg" class="list__img">
+            <a href="/resumenVentas" class="nav__link">Resumen Ventas</a>
+          </div>
+        </li>
+      </ul> 
+    </nav>
+    <div class="table-container">
+    <h1>HOLA Cajero (ventas a traves de la web)</h1>
+    <a href="/user/logout" class="label">Logout</a>
+    <% let codVentaActual = null %>
+    <% venta.forEach(function(venta) { %>
+      <% if (venta.codventa !== codVentaActual) { %>
+      <table value="<%= venta.codventa %>">
+        <h6>Venta Número <%= venta.codventa %></h6>
+        <button class="btn btn-success" onclick="Agregar(<%= venta.codventa %>)"> Agregar</button>
+        <thead >
+          <tr>
+            <input type="hidden" name="" id="tipoventa" value="<%= venta.tipoventa %>">
+            <input type="hidden" name="" id="total" value="<%= venta.preciototal %>">
+            <input type="hidden" name="" id="nombrecajero" value="<%= cajeroDatos.nombres %>">
+            <input type="hidden" name="" id="apellidocajero" value="<%= cajeroDatos.apellidos %>">
+            <input type="hidden" name="" id="dnicajero" value="<%= cajeroDatos.dni %>">
+            <th>Código de venta</th>
+            <th>Nombre Platillo</th>
+            <th>Cantidad</th>
+            <th>Tipo venta</th>
+            <th>Precio</th>
+            <th>
+              Estado:
+              <button class="btn btn-outline-success" onclick="confirmar(<%= venta.codventa %>)">
+                <% if(venta.estado==='2'){ %>
+                  Por preparar
+                <% } %>
+                <% if(venta.estado==='3'){ %>
+                  Preparado
+                <% } %>
+              </button>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+        <% codVentaActual = venta.codventa %>
+        <% } %>
+          <tr <% if (venta.estadonuevo === '3') { %>class="fila-roja"<% } %>>
+            <td><%= venta.codventa %></td>
+            <td><%= venta.nombre %></td>
+            <td><%= venta.cantidad %></td>
+            <td><%= venta.tipoventa %></td>
+            <td><%= venta.precio %></td>
+            <td>
+              <button class="btn btn-danger btn-sm"  onclick="Quitar('<%= venta.codplatillo %>', '<%= venta.codventa %>' , '<%= venta.precio %>', '<%= venta.cantidad %>')">Quitar</button>
+            </td>
+          </tr>
+        </tbody>
+      <% }); %>
+      </table>
+      </div>
+      <script>
+        async function Agregar(codventa1) {
+          let codventa = codventa1;
+          plato = await axios.get(`/waiterPlatillo`);
+          const platos=plato.data;
+          console.log(platos);
+          Swal.fire({
+            title: 'Registrar Venta',
+            showCancelButton: false,
+            showConfirmButton: false,
+            html: `
+              <form id="agregarUsuarioForm" method="post" action="/user/WaiterVentas1">
+                <input type="hidden" name="estadoBoton" value="0">
+                <div id="platos-container" class="form-group" >
+                  <!-- Los campos de los platos se generarán aquí -->
+                </div>
+                <br/>
+                <button type="submit" class="submit" style="background-color: #4CAF50; border: none; color: white; padding: 10px 24px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; border-radius: 5px; cursor: pointer;" id="registrarBoton">Registrar</button>
+                <a href="#" class="cancel" style="background-color: #d33; border: none; color: white; padding: 10px 24px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; border-radius: 5px; cursor: pointer; margin-left: 10px;" id="cancelarBoton">Cancelar</a>
+              </form>
+            `
+          });
+
+          // Generar campos para cada platillo
+          const platosContainer = document.getElementById('platos-container');
+          platos.forEach((platillo, index) => {
+            const inputName = `platillo${index + 1}`;
+            const inputPrecioName = `precio${index + 1}`;
+            const inputCantidadName = `cantidad${index + 1}`;
+            const checkboxId = `platillo-checkbox${index + 1}`;
+
+            const div = document.createElement('div');
+            div.classList.add('form-group');
+
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.id = checkboxId;
+            checkbox.name = 'platillo';
+            checkbox.value = platillo.codplatillo; //obtienes el valor del código del platillo
+
+            const label = document.createElement('label');
+            label.htmlFor = checkboxId;
+            label.textContent = platillo.nombre;
+            label.name = 'platillos';
+            label.value = platillo.nombre;
+
+            const inputCantidad = document.createElement('input');
+            inputCantidad.type = 'number';
+            inputCantidad.id = inputCantidadName;
+            inputCantidad.name = 'cantidades'; //obtienes el valor de las cantidades del platillo que ha seleccionado
+            inputCantidad.placeholder = 'Cantidad';
+            inputCantidad.required = false;
+            inputCantidad.disabled = true; // Deshabilitar los campos de cantidad inicialmente
+
+            const labelPrecio = document.createElement('label');
+            labelPrecio.htmlFor = inputPrecioName;
+            labelPrecio.textContent = 'Precio';
+
+            const inputPrecio = document.createElement('input');
+            inputPrecio.type = 'text';
+            inputPrecio.id = inputPrecioName;
+            inputPrecio.name = 'precios';
+            inputPrecio.value = platillo.precio; //obtienes los precios de los platillos seleccionados
+            inputPrecio.disabled = true; // Deshabilitar los campos de cantidad inicialmente
+
+            const botonMas = document.createElement('button')
+
+            div.appendChild(checkbox);
+            div.appendChild(label);
+            div.appendChild(document.createElement('br'));
+            div.appendChild(inputCantidad);
+            div.appendChild(document.createElement('br'));
+            div.appendChild(labelPrecio);
+            div.appendChild(inputPrecio);
+
+            platosContainer.appendChild(div);
+
+            // Habilitar/deshabilitar el campo de cantidad según la selección del checkbox
+            checkbox.addEventListener('change', (event) => {
+              inputCantidad.disabled = !event.target.checked;
+              inputPrecio.disabled = !event.target.checked;
+            });
+          });
+
+          document.getElementById('agregarUsuarioForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+            try {
+              Swal.fire('Modificado!', '', 'success');
+              setTimeout(function () {
+                location.reload();
+              }, 1000);
+              const response = await axios.post('/actualizarPedidoWeb', {
+                codventa,
+                platillo: Array.from(formData.getAll('platillo')),
+                cantidades: Array.from(formData.getAll('cantidades')),
+                precios: Array.from(formData.getAll('precios'))
+              });
+              console.log(response);
+            } catch (error) {
+              Swal.fire('Error', 'Ha ocurrido un error al enviar el formulario', 'error');
+            }
+          });
+
+          document.getElementById('cancelarBoton').addEventListener('click', () => {
+            Swal.close();
+          });
+        }
+      </script>
+    <script>
+      async function confirmar(id) {
+        try{
+          responseClient = await axios.get(`/generate/${id}`)
+          const datosBoleta= responseClient.data; 
+          const datosCliente=datosBoleta[0];
+          console.log(datosCliente);
+          Swal.fire({
+          title: 'Generar boleta: Cliente',
+          showCancelButton: false, // Ocultar el botón de cancelar de SweetAlert
+          showConfirmButton: false ,// Ocultar el botón de confirmar de SweetAlert
+          html: ` 
+            <form id="agregarUsuarioForm" method="post" action="/generate" >
+              <input type="hidden" id="id" name="id" value="2">
+              <input type="hidden" id="fechaHoraActual" name="fechaHoraActual" value="">
+              <div class="form-group">
+                <label for="dni">Código de venta:</label>
+                <input type="number" class="form-control" id="codventa" name="codventa" value="${datosCliente.codventa}" readonly required>
+              </div>
+              <div class="form-group">
+                <label for="dni">DNI:</label>
+                <input type="number" class="form-control" id="dni" name="dni" value="${datosCliente.dni}" required>
+              </div>
+              <div class="form-group">
+                <label for="nombre">Nombre del Cliente:</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" value="${datosCliente.nombres}" required>
+              </div>
+              <div class="form-group">
+                <label for="apellidos">Apellidos</label>
+                <input type="text" class="form-control" id="apellidos" name="apellidos" value ="${datosCliente.apellidos}"required>
+              </div>
+                <div class="form-group">
+                <label for="telefono">Telefono</label>
+                <input type="tel" class="form-control" id="telefono" name="telefono" value ="${datosCliente.celular}"required>
+              </div>
+              <div class="form-group">
+                <label for="direccion">Direccion</label>
+                <input type="text" class="form-control" id="direccion" name="direccion" value ="${datosCliente.direccion}"required>
+              </div>
+              <br/>
+              <button type="submit" class="submit" style="background-color: #4CAF50; border: none; color: white; padding: 10px 24px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; border-radius: 5px; cursor: pointer;" id="registrarBoton" onclick="generarPDF()">Registrar</button>
+              <a href="#" class="cancel" style="background-color: #d33; border: none; color: white; padding: 10px 24px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; border-radius: 5px; cursor: pointer; margin-left: 10px;" id="cancelarBoton">Cancelar</a>
+            </form>`
+            });
+            // Obtener el elemento del campo de entrada oculto
+            const inputFechaHoraActual = document.getElementById("fechaHoraActual");
+
+            // Obtener la fecha y hora actual
+            const fechaHoraActual = new Date();
+
+            // Formatear la fecha y hora en un formato deseado
+            const formatoFechaHora = `${fechaHoraActual.getFullYear()}-${(fechaHoraActual.getMonth() + 1).toString().padStart(2, "0")}-${fechaHoraActual.getDate().toString().padStart(2, "0")} ${fechaHoraActual.getHours().toString().padStart(2, "0")}:${fechaHoraActual.getMinutes().toString().padStart(2, "0")}:${fechaHoraActual.getSeconds().toString().padStart(2, "0")}`;
+
+            // Asignar la fecha y hora al campo de entrada oculto
+            inputFechaHoraActual.value = formatoFechaHora;
+            // Agregar listener de evento para el botón "Registrar"
+            document.getElementById('agregarUsuarioForm').addEventListener('submit', async (event) => {
+              event.preventDefault(); // Evitar que el formulario se envíe de inmediato
+              const formData = new FormData(event.target);
+              const formValues = Object.fromEntries(formData.entries());
+              try {
+                  // Enviar el formulario manualmente
+                  const response = await axios.post('/generate',formValues);
+                  console.log(response)
+                  Swal.fire('Modificado!', '', 'success');
+                  setTimeout(function () {
+                      location.reload();
+                  }, 1000);
+              } catch (error) {
+                  Swal.fire('Error', 'Ha ocurrido un error al enviar el formulario', 'error');
+              }
+            });
+
+            document.getElementById('cancelarBoton').addEventListener('click', () => {
+                console.log('eres gei');
+                Swal.close();
+            }); 
+                } catch (error) {
+                  console.log(error);
+                  return res.status(500).json({
+                    message: "Error al modificar el usuario",
+                    error,
+                  });
+                }
+              
+      }
+      </script>
+      <script>
+        async function generarPDF() {
+          try {
+            // Captura los va lores de los campos del formulario
+            const idventa = document.getElementById("codventa").value;
+            let ventaDataResponse  = await axios.get(`/generate/${idventa}`);
+            const ventaData = ventaDataResponse.data;
+            console.log(ventaData, "venta total");
+            const nombre = document.getElementById("nombre").value;
+            const apellidos = document.getElementById("apellidos").value;
+            const celular = document.getElementById("telefono").value;
+            const dni = document.getElementById("dni").value;
+            const tipoventa = ventaData[0].tipoventa;
+            const direccion = document.getElementById("direccion").value;
+            const nombreCajero = document.getElementById("nombrecajero").value;
+            const apellidoCajero = document.getElementById("apellidocajero").value;
+            const dnicajero = document.getElementById("dnicajero").value;
+            console.log(nombreCajero,apellidoCajero,dnicajero, "nombre del cajero");
+            const total = ventaData[0].preciototal;
+            const codventa= ventaData[0].codventa;
+            const fechahora = document.getElementById("fechaHoraActual").value;
+            // Función para convertir dígitos numéricos a palabras en español
+            function convertirNumeroAPalabras(numero) {
+              const unidades = ["", "uno", "dos", "tres", "cuatro", "cinco", "seis", "siete", "ocho", "nueve"];
+              const especiales = ["diez", "once", "doce", "trece", "catorce", "quince", "dieciséis", "diecisiete", "dieciocho", "diecinueve"];
+              const decenas = ["", "", "veinte", "treinta", "cuarenta", "cincuenta", "sesenta", "setenta", "ochenta", "noventa"];
+
+              if (numero < 10) {
+                return unidades[numero];
+              } else if (numero < 20) {
+                return especiales[numero - 10];
+              } else if (numero < 100) {
+                const unidad = numero % 10;
+                const decena = Math.floor(numero / 10);
+                if (unidad === 0) {
+                  return decenas[decena];
+                } else {
+                  return decenas[decena] + " y " + unidades[unidad];
+                }
+              } else {
+                return "";
+              }
+            }
+
+            // Convertir el número total a palabras en español
+            const totalTexto = convertirNumeroAPalabras(total) + " soles";
+
+            console.log(total,"total de la venta",fechahora);
+            const doc = new jsPDF({
+                format: "a6",
+            });
+            doc.setFont("times");
+            doc.setFontSize(10);
+            // Agrega los datos al documento PDF
+            doc.text(`KENTAKITO`, 40, 5);
+            doc.setFontSize(9);
+            doc.text(`DE: PINEDO IZUIZA DEYBITH`, 28, 8);
+            doc.setFontSize(8);
+            doc.text(`URB. FONAVI MANZANA B LOTE 7`, 27, 11);
+            doc.text(`Dirección Empresa: jr. Leoncio prado 1189`, 26, 14);
+            doc.setFontSize(7);
+            doc.text(`Numeros de celular: 986363913 / 961324321`, 27, 17);
+            doc.setFontSize(6);
+            doc.text(`RUC: 10443831113`, 40, 20);
+            doc.setFontSize(10);
+            doc.text(`----------------------------------------------------------------------------------`, 5, 22); 
+            doc.text(`BOLETA ELECTRÓNICA B001-${codventa}`, 25 , 26);
+            doc.text(`----------------------------------------------------------------------------------`, 5, 30); 
+            doc.text(`Fecha: ${fechahora}`, 5, 33);
+            doc.text(`Nombre: ${nombre}`, 5, 36);
+            doc.text(`Apellidos: ${apellidos}`, 5, 39);
+            doc.text(`Celular: ${celular}`, 5, 42);
+            doc.text(`DNI: ${dni}`, 5, 45);
+            doc.text(`Tipo de venta: ${tipoventa}`, 5, 48);
+            doc.text(`Dirección: ${direccion}`, 5, 51);
+            doc.text(`DESCRIPCION` , 5 , 61);
+            doc.text(`----------------------------------------------------------------------------------`, 5, 64);
+            doc.text(`Producto`, 5,70 );
+            doc.text(`Cantidad`, 45,70 );
+            doc.text(`Precio Unitario`, 60,70 );
+            doc.text(`Importe`, 85,70 );
+            let y=75;
+            let x=5;
+            ventaData.forEach((producto) => {
+              const titulo = producto.nombre;
+              const precio = producto.precio;
+              const cantidad = producto.cantidad;
+              const importe = cantidad*precio;
+              doc.text(`${titulo}`, x, y);
+              doc.text(`${cantidad}`, x+ 45, y);
+              doc.text(`${precio} soles`, x+55, y);
+              doc.text(`${importe} soles`, x+80, y);
+              y += 5;
+            });
+            doc.text(`----------------------------------------------------------------------------------`, 5, y);
+            doc.text(`SUB TOTAL`, 40, y+5);
+            doc.text(`S/`, 70, y+5);
+            doc.text(`${total}`, 84, y+5);
+            doc.text(`DESCUENTO`, 40, y+8);
+            doc.text(`S/`, 70, y+8);
+            doc.text(`0.00`, 86, y+8);
+            doc.text(`INAFECTA`, 40, y+11);
+            doc.text(`S/`, 70, y+11);
+            doc.text(`0.00`, 86, y+11);
+            doc.text(`IGV (18%)`, 40, y+14);
+            doc.text(`S/`, 70, y+14);
+            doc.text(`0.00`, 86, y+14);
+            doc.text(`ICBPER`, 40, y+17);
+            doc.text(`S/`, 70, y+17);
+            doc.text(`0.00`, 86, y+17);
+            doc.text(`TOTAL`, 40, y+20);
+            doc.text(`S/`, 70, y+20);
+            doc.text(`${total}`, 84, y+20);
+            doc.text(`----------------------------------------------------------------------------------`, 5, y+23);
+            doc.text(`SON: ${totalTexto}`, 5, y+26);
+            doc.text(`----------------------------------------------------------------------------------`, 5, y+30);
+            doc.text(`Gracias por su preferencia`, 30, y+33);
+            doc.setFontSize(8);
+            doc.text(`Bienes transferidos en la amazonía`, 28, y+36);
+            doc.text(`Para ser consumidos en la misma`, 30, y+39);
+            doc.text(`© 2023 Kentakitos Hamburguer`, 30, y+42);
+            // Descarga el documento PDF
+            doc.save("compra.pdf", { autoDownload: true });
+            } catch (error) {
+            console.error(error);
+          }
+        }
+      </script>
+      <script>
+        async function Quitar(platillo1,codventa1,precio1, cantidad1) {
+          let platillo = platillo1;
+          let codventa= codventa1;
+          let precio = precio1;
+          let cantidad = cantidad1;
+          const tipoventa=1;
+          console.log(platillo)
+          console.log(codventa)
+          try {
+            Swal.fire('Modificado!', '', 'success');
+            setTimeout(function () {
+              location.reload();
+            }, 1000);
+            const response = await axios.post('/borrarPedido', {
+              platillo,
+              codventa,
+              precio,
+              cantidad,
+              tipoventa
+            });
+            console.log(response);
+          } catch (error) {
+            Swal.fire('Error', 'Ha ocurrido un error al enviar el formulario', 'error');
+          }
+        }
+      </script>
+      <script src="/assets/scripts/desplegable.js"></script>
+  </body>
+</html>

@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bootstrap demo</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
+      crossorigin="anonymous"
+    />
+    <script src="https://kit.fontawesome.com/b1d1afb1da.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
+  </head>
+  <body>
+    <main>
+      <nav class="navbar bg-light" aria-label="Light offcanvas navbar">
+        <div class="container-fluid">
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasNavbarLight"
+            aria-controls="offcanvasNavbarLight"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <a class="navbar-brand" href="#">AdminPanel Kentakitos</a>
+
+          <div
+            class="offcanvas offcanvas-start"
+            tabindex="-1"
+            id="offcanvasNavbarLight"
+            aria-labelledby="offcanvasNavbarLightLabel"
+          >
+            <div class="offcanvas-header">
+              <h5 class="offcanvas-title" id="offcanvasNavbarLightLabel">
+                Kentakitos
+              </h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="offcanvas"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="offcanvas-body">
+              <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                <li class="nav-item dropdown">
+                  <a
+                    class="nav-link dropdown-toggle"
+                    href="#"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    USUARIOS
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <a class="dropdown-item" href="/user/admin/register">Registrar Usuarios</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="/user/admin/permission">Asignar Permisos</a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="nav-item dropdown">
+                  <a
+                    class="nav-link dropdown-toggle"
+                    href="#"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    PRODUCTOS
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <a class="dropdown-item" href="/productos">Registrar Productos</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="/categorias">Registrar Categorias</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="/proveedores"
+                        >Registrar Proveedores</a
+                      >
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="/marcas"
+                        >Registrar Marcas</a
+                      >
+                    </li>
+                  </ul>
+                </li>
+                <li class="nav-item dropdown">
+                  <a
+                    class="nav-link dropdown-toggle"
+                    href="#"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    COMPRAS
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <a class="dropdown-item" href="/compras"> Registar Compras</a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a
+                      class="nav-link dropdown-toggle"
+                      href="#"
+                      role="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      VENTAS
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li>
+                        <a class="dropdown-item" href="/menues"> Registar Menu</a>
+                      </li>
+                    </ul>
+                  </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <!-- aqui empieza el contenido -->
+      <div class="container">
+        <div class="bg-light p-2">
+          <div class="col-sm-12 py-5">
+            <h1 class="display-5 fw-normal text-center">Proveedores</h1>
+            <hr />
+            <div class="container">
+                <span>Agregar Proveedor:</span>
+                <a onclick="agregar()" class="btn btn-outline-primary m-4"><i class="fa-solid fa-plus" style="color: #000000;"></i></a>
+            </div>
+            <div>
+                <table class="table caption-top table-light table-striped" id="mitabla">
+                  <div class="position-static">
+                    <thead class="table-dark">
+                      <tr>
+                        <th>Codproveedor</th>
+                        <th>Razon Comercial</th>
+                        <th>Direccion</th>
+                        <th>Telefono</th>
+                        <th>Representante</th>
+                        <th>Correo</th>
+                        <th>Numero de cuenta</th>
+                        <th>Razon Social</th>
+                        <th>Ruc</th>
+                        <th>Opciones</th>
+                      </tr>
+                    </thead>
+                  </div>
+                  <tbody>
+                    <!-- //make a ejs for each -->
+                    <% proveedores.forEach(function(elemento) { %>
+                        <tr>
+                         <td><%=elemento.codproveedor%></td>
+                          <td><%=elemento.nomcompania%></td>
+                          <td><%=elemento.direccion%></td>
+                          <td><%=elemento.telefono%></td>
+                          <td><%=elemento.representante%></td>
+                          <td><%=elemento.correo%></td>
+                          <td><%=elemento.nrocntabanc%></td>
+                          <td><%=elemento.nombre%></td>
+                          <td><%=elemento.ruc%></td>
+                         
+                          <td>
+                            <div class="container d-flex gap-2">
+                         <a onclick="editar(<%= elemento.codproveedor %>)" class="btn btn-outline-info">editar</a>
+                         <a onclick="eliminar(<%= elemento.codproveedor %>)" class="btn btn-outline-danger">borrar</a>
+                        </div>  
+                        </td>
+                       
+                        </tr>
+                        <% }); %>
+                  
+                  </tbody>
+                </table>
+              </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>    
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+      crossorigin="anonymous"
+    >
+  </script>
+  <script>
+    async function  editar(id) {
+        try {
+            response = await axios.get(`/proveedores/${id}`)
+            const datosproveedor = response.data[0];
+            Swal.fire({
+      title: 'Editar Proveedor',
+         showCancelButton: false, // Ocultar el botón de cancelar de SweetAlert
+        showConfirmButton: false ,// Ocultar el botón de confirmar de SweetAlert
+      html: 
+      `<form id="agregarUsuarioForm" method="post" action="/proveedor">
+    <input type="number" class="form-control" hidden id="id" name="id" value="${datosproveedor.codproveedor}" required>
+  <div class="form-group">
+    <label for="compania">Razon Comercial</label>
+    <input type="text" class="form-control" id="compania" name="compania" value="${datosproveedor.nomcompania}" required>
+  </div>
+  <div class="form-group">
+    <label for="direccion">Direccion</label>
+    <input type="text" class="form-control" id="direccion" name="direccion" value="${datosproveedor.direccion}" disabled required>
+  </div>
+  <div class="form-group">
+    <label for="telefono">Telefono</label>
+    <input type="number" class="form-control" id="telefono" name="telefono" value="${datosproveedor.telefono}" required>
+  </div>
+  <div class="form-group">
+    <label for="representante">Representante</label>
+    <input type="text" class="form-control" id="representante" value="${datosproveedor.representante}" name="representante" required>
+  </div>
+    <div class="form-group">
+    <label for="correo">Correo</label>
+    <input type="email" class="form-control" id="correo" name="correo" value="${datosproveedor.correo}"required>
+    </div>
+    <div class="form-group">
+    <label for="numcuenta">Numero de Cuenta</label>
+    <input type="text" class="form-control" id="numcuenta" name="numcuenta" value="${datosproveedor.nrocntabanc}" required>
+    </div>
+    <div class="form-group">
+    <label for="nombre">Razon Social</label>
+    <input type="text" class="form-control" id="nombre" name="nombre" value="${datosproveedor.nombre}" disabled required>
+    </div>  
+    <div class="form-group">
+    <label for="ruc">RUC</label>
+    <input type="number" class="form-control" id="ruc" name="ruc" value="${datosproveedor.ruc}" disabled required>
+    </div> 
+    <br/>
+  <button type="submit" class="submit" style="background-color: #4CAF50; border: none; color: white; padding: 10px 24px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; border-radius: 5px; cursor: pointer;" id="registrarBoton">Registrar</button>
+  <a href="#" class="cancel" style="background-color: #d33; border: none; color: white; padding: 10px 24px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; border-radius: 5px; cursor: pointer; margin-left: 10px;" id="cancelarBoton">Cancelar</a>
+
+  </form>`,
+      });
+       // Agregar listener de evento para el botón "Registrar"
+       document.getElementById('agregarUsuarioForm').addEventListener('submit', async (event) => {
+        document.getElementById('nombre').disabled = false;
+      document.getElementById('direccion').disabled = false;
+      document.getElementById('ruc').disabled = false;
+    event.preventDefault(); // Evitar que el formulario se envíe de inmediato
+    const formData = new FormData(event.target);
+    const formValues = Object.fromEntries(formData.entries());
+    try {
+      
+        // Enviar el formulario manualmente
+        const response = await axios.post('/proveedor',formValues);
+        console.log(response)
+        Swal.fire('Modificado!', '', 'success');
+        setTimeout(function () {
+            location.reload();
+        }, 1000);
+    } catch (error) {
+        Swal.fire('Error', 'Ha ocurrido un error al enviar el formulario', 'error');
+    }
+});   
+      document.getElementById('cancelarBoton').addEventListener('click', () => {
+        console.log('eres gei')
+      Swal.close(); // Cerrar la ventana modal de SweetAlert
+    });  
+        } catch (error) {
+            console.log(error);
+         return res.status(500).json({
+        message: "Error al modificar el usuario",
+         error,
+    });
+        }
+       
+    }
+  </script>
+  <script>
+    function eliminar(id) {
+        Swal.fire({
+  title: '¿Confirmar eliminar el registro?',
+  icon : 'warning',
+  showCancelButton: true,
+  confirmButtonColor : "#3085d6",
+  cancelButtonColor : "#d33",
+  confirmButtonText: 'Confirmar',
+  denyButtonText: `Cancelar`,
+}).then((result) => {
+  /* Read more about isConfirmed, isDenied below */
+  if (result.isConfirmed) {
+     Swal.fire('Eliminado!', '', 'success')
+    //wait 5 seg 
+    setTimeout(function(){ window.location = '/delprove/'+id }, 1000);
+  } else if (result.isDenied) {
+    Swal.fire('Changes are not saved', '', 'info')
+  }
+})
+    }
+  </script>
+  <script>
+   
+    async function agregar() {
+        Swal.fire({
+      title: 'Agregar Proveedor',
+         showCancelButton: false, // Ocultar el botón de cancelar de SweetAlert
+        showConfirmButton: false ,// Ocultar el botón de confirmar de SweetAlert
+      html: `
+      <form id="agregarUsuarioForm" method="post" action="/proveedores">
+    <div class="form-group">
+    <label for="ruc">RUC</label>
+    <input type="number" class="form-control" id="ruc" name="ruc" required>
+    <div id="mensajeRucNoEncontrado"></div>
+    <a  id="btnruc" class="btn btn-outline-primary m-4"><i class="fa-solid fa-magnifying-glass"></i></a>
+    </div> 
+    <div class="form-group">
+    <label for="nombre">Razon Social</label>
+    <input type="text" class="form-control" id="nombre" name="nombre" readonly required>
+    </div>
+    <div class="form-group">
+    <label for="direccion">Direccion</label>
+    <input type="text" class="form-control" id="direccion" name="direccion"  readonly required>
+  </div>
+    <div class="form-group">
+    <label for="compania">Razon Comercial</label>
+    <input type="text" class="form-control" id="compania" name="compania" required>
+  </div>
+ 
+  <div class="form-group">
+    <label for="telefono">Telefono</label>
+    <input type="number" class="form-control" id="telefono" name="telefono" required>
+  </div>
+  <div class="form-group">
+    <label for="representante">Representante</label>
+    <input type="text" class="form-control" id="representante" name="representante" required>
+  </div>
+    <div class="form-group">
+    <label for="correo">Correo</label>
+    <input type="email" class="form-control" id="correo" name="correo" required>
+    </div>
+    <div class="form-group">
+    <label for="numcuenta">Numero de Cuenta</label>
+    <input type="text" class="form-control" id="numcuenta" name="numcuenta" required>
+    </div>  
+    <br/>
+  <button type="submit" class="submit" style="background-color: #4CAF50; border: none; color: white; padding: 10px 24px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; border-radius: 5px; cursor: pointer;" id="registrarBoton">Registrar</button>
+  <a href="#" class="cancel" style="background-color: #d33; border: none; color: white; padding: 10px 24px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; border-radius: 5px; cursor: pointer; margin-left: 10px;" id="cancelarBoton">Cancelar</a>
+
+  </form>`,
+      });
+      document.getElementById('agregarUsuarioForm').addEventListener('submit', async (event) => {
+        const variable  = document.getElementById('ruc').value
+        if (variable.length!==11) {
+          Swal.fire('Error', 'El RUC debe tener 11 digitos', 'error');
+          event.preventDefault(); 
+        }else{
+
+    event.preventDefault(); // Evitar que el formulario se envíe de inmediato
+    const formData = new FormData(event.target);
+    const formValues = Object.fromEntries(formData.entries());
+    try {
+        // Enviar el formulario manualmente
+        const response = await axios.post('/proveedores',formValues);
+        console.log(response)
+        Swal.fire('Registrado!', '', 'success');
+        setTimeout(function () {
+            location.reload();
+        }, 1000);
+    } catch (error) {
+        Swal.fire('Error', 'Ha ocurrido un error al enviar el formulario', 'error');
+    }
+  }
+});
+
+    document.getElementById('cancelarBoton').addEventListener('click', () => {
+        console.log('eres gei');
+        Swal.close();
+    });
+
+    document.getElementById('btnruc').addEventListener('click', async (event) => {
+      document.getElementById('direccion').value = '';
+      const ruc = document.getElementById('ruc').value;
+      const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImJhcnJlcml0YV9yb21lcm9AaG90bWFpbC5jb20ifQ.5sH-f-HlBuJvJNaNE6PXpa62-BqUnsofT0fZHxdOUPU';
+      const url = `https://dniruc.apisperu.com/api/v1/ruc/${ruc}?token=${token}`;
+      try {
+        // Realizar la solicitud a la API para obtener los datos del proveedor según el RUC
+        const response = await axios.get(url);
+        const datosProveedor = response.data;
+        console.log(datosProveedor)
+        if (datosProveedor.success!=false) {
+        // RUC encontrado
+        document.getElementById('mensajeRucNoEncontrado').innerHTML = ''; // Limpiar el mensaje de RUC no encontrado
+        if (datosProveedor.direccion!=null) {
+          document.getElementById('direccion').value = datosProveedor.direccion;
+          document.getElementById('direccion').readOnly = true;
+          document.getElementById('nombre').value = datosProveedor.razonSocial;
+        }else{
+          document.getElementById('nombre').value = datosProveedor.razonSocial;
+          document.getElementById('direccion').readOnly = false;
+        }
+         
+        
+        // Resto del código para llenar los campos y demás acciones
+       } else {
+        // RUC no encontrado
+        document.getElementById('mensajeRucNoEncontrado').innerHTML = "<p style='color: red; font-weight: bold; margin-top: 10px;'>RUC no encontrado</p>";
+       }
+        // Llenar los campos con los datos del proveedor
+        
+      } catch (error) {
+        document.getElementById('mensajeRucNoEncontrado').innerHTML = "<p style='color: red; font-weight: bold; margin-top: 10px;'>RUC no encontrado</p>";
+        // Manejar el error de acuerdo a tus necesidades
+      }
+    });
+
+
+}
+     
+    
+  </script>
+  <script>
+$(document).ready(function () {
+    $('#mitabla').DataTable();
+});
+  </script>
+  </body>
+</html>

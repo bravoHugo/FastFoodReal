@@ -1,0 +1,155 @@
+<ul>
+  <% if (typeof errors != 'undefined') { %> <% errors.forEach(error => { %>
+  <li><%= error.message %></li>
+  <% }) %> <% } %>
+</ul>
+
+<ul>
+  <% if(messages.success_msg) { %>
+  <li><%= messages.success_msg %></li>
+  <% } %>
+</ul>
+
+<ul>
+  <% if (messages.error) { %>
+  <li><%= messages.error %></li>
+  <% } %>
+</ul>
+<!-- ***************************************************************** -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/assets/Style/style.css" />
+    <title>Iniciar Sesión</title>
+  </head>
+  <body>
+    <div class="container" id="container">
+      <div class="form-container register-container">
+        <form action="/user/register" method="post">
+          <h1>Registrate Aquí.</h1>
+          <input
+            type="text"
+            id="nombres"
+            name="nombres"
+            placeholder="Nombre"
+            required
+          />
+          <input
+            type="text"
+            id="apellidos"
+            name="apellidos"
+            placeholder="Apellidos"
+            required
+          />
+          <input
+            type="tel"
+            id="dni"
+            name="dni"
+            placeholder="Numero de DNI"
+            required
+          />
+          <input
+            type="email"
+            id="correo"
+            name="correo"
+            placeholder="Email"
+            required
+          />
+          <input
+            type="tel"
+            id="celular"
+            name="celular"
+            placeholder="Numero de celular"
+            required
+          />
+          <input
+            type="text"
+            id="direccion"
+            name="direccion"
+            placeholder="Domicilio Actual"
+            required
+          />
+          <input
+            type="password"
+            id="contraseña"
+            name="contraseña"
+            placeholder="Contraseña"
+            required
+          />
+          <input
+            type="password"
+            id="contraseña2"
+            name="contraseña2"
+            placeholder="Confirme contraseña"
+            required
+          />
+
+          <button type="submit" value="Register">Registro</button>
+        </form>
+      </div>
+
+      <div class="form-container login-container">
+        <form action="/user/login" method="post">
+          <h1>Iniciar Sesión.</h1>
+          <input
+            type="email"
+            id="correo"
+            name="correo"
+            placeholder="Email"
+            required
+          />
+          <input
+            type="password"
+            id="contraseña"
+            name="contraseña"
+            placeholder="Contraseña"
+            required
+          />
+          <div class="content">
+            <div class="pass-link">
+              <a href="/user/recuperar">¿Olvidaste tu contraseña?</a>
+            </div>
+          </div>
+          <button type="submit" accesskey="" value="Login">Acceso</button>
+          <button class="home" type="submit" onclick="window.location.href = '/user/index';" value="Login">
+            Home
+          </button>          
+        </form>
+      </div>
+
+      <div class="overlay-container">
+        <div class="overlay">
+          <div class="overlay-panel overlay-left">
+            <h1 class="title">¡Buen provecho!</h1>
+            <p>
+              ¡No busques más! Regístrate aquí y descubre nuestros platos
+              deliciosos que te harán agua la boca
+            </p>
+            <button class="ghost" id="login">
+              Acceso
+              <i class="lni lni-arrow-left login"></i>
+            </button>
+          </div>
+          <div class="overlay-panel overlay-right">
+            <h1 class="title">
+              ¡No pierdas la oportunidad de probar algo nuevo y emocionante!
+            </h1>
+            <p>
+              Si aún no tienes una cuenta, únete a nosotros y comienza a
+              explorar nuestra deliciosa selección de platos y bebidas.
+            </p>
+            <button class="ghost" id="register">
+              Registro
+              <i class="lni lni-arrow-right register"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="/assets/scripts/script.js"></script>
+  </body>
+</html>

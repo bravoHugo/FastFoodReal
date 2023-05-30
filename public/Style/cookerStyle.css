@@ -1,0 +1,38 @@
+#contenedor {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.label {
+  position: absolute;
+  top: 2rem;
+  right: 4rem;
+  transform: translate(0, -50%);  
+  padding: 10px 30px;
+  background-color: #f77925;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+h2{
+  display: flex;
+  justify-content: center;
+}
+
+#web{
+  width: 50%;
+  border-right: solid #f77925;
+  padding: 0 2% 0 1%;
+}
+
+#presencial {
+  width: 48%;
+}
+body{
+  background-color:white;
+}

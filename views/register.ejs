@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Register</title>
+  </head>
+  <body>
+    <h1>Registrarse</h1>
+
+    <ul>
+      <% if (typeof errors != 'undefined') { %> <% errors.forEach(error => { %>
+      <li><%= error.message %></li>
+      <% }) %> <% } %>
+    </ul>
+    <form action="/user/register" method="POST">
+      <div>
+        <input
+          type="text"
+          id="nombres"
+          name="nombres"
+          placeholder="Nombre"
+          required
+        />
+      </div>
+      <div>
+        <input
+          type="email"
+          id="correo"
+          name="correo"
+          placeholder="Email"
+          required
+        />
+      </div>
+      <div>
+        <input
+          type="password"
+          id="contraseña"
+          name="contraseña"
+          placeholder="Contraseña"
+          required
+        />
+      </div>
+      <div>
+        <input
+          type="password"
+          id="contraseña2"
+          name="contraseña2"
+          placeholder="Confirme contraseña"
+          required
+        />
+      </div>
+      <div>
+        <input type="submit" value="Register" />
+      </div>
+
+      <a href="/user/login">Already registered? Login here</a>
+    </form>
+  </body>
+</html>
